@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+      * {
+        padding: 0.5rem 1rem;
+      }
+    </style>
+  </head>
+  <body>
+    <table>
+      <tr>
+        <thead>
+          Vehicle Id
+        </thead>
+        <thead>
+          Vehicle Name
+        </thead>
+        <thead>
+          Employee Id
+        </thead>
+      </tr>
+      {% for vehicle in vehicles %}
+      <td>{{vehicle.id}}</td>
+      <td>{{vehicle.vname}}</td>
+      <td>{{vehicle.employee_id}}</td>
+      <td><a href="/vehicle_delete/{{vehicle.id}}">Delete</a></td>
+      {% endfor %}
+    </table>
+    <a href="/vehicle_add/">Add Vehicle</a>
+  </body>
+</html>
