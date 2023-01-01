@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Vehicle Add</title>
+    <style>
+      .form_div {
+        display: flex;
+        flex-direction: column;
+      }
+      .form_div div {
+        margin: 1rem;
+      }
+    </style>
+  </head>
+  <body>
+    <form action="" method="post">
+      {% csrf_token %}
+      <div class="form_div">
+        <div>
+          <label for="employee">Employee Id</label>
+          <select name="employee">
+            {% for employee in employees %}
+            <option value="{{employee.eid}}">{{employee.ename}}</option>
+            {% endfor %}
+          </select>
+        </div>
+        <div>
+          <label for="vname">Vehicle name</label>
+          <input name="vname" type="text" required />
+        </div>
+        <div>
+          <label for="vregister_no">Register No</label>
+          <input name="vregister_no" type="text" required value="" />
+        </div>
+        <div>
+          <label for="vmodel">Vehicle Model</label>
+          <input name="vmodel" type="text" required value="" />
+        </div>
+        <div>
+          <label for="capacity">Vehicle Capacity</label>
+          <input name="capacity" type="number" required value="" />
+        </div>
+        <div>
+          <label for="cost">Vehicle Cost(per KM)</label>
+          <input name="cost" type="number" required value="" />
+        </div>
+        <div>
+          <label for="fuel">Fuel Type</label>
+          <input name="fuel" type="text" required value="" />
+        </div>
+      </div>
+      <!-- {{form.as_p }} -->
+      <input type="submit" value="Submit" />
+    </form>
+  </body>
+</html>

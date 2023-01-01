@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Vehicle Update</title>
+  </head>
+  <body>
+    <form action="/vehicle_add/" method="post">
+      {% csrf_token %}
+      <label for="employee">Employee Id</label>
+      <select name="employee">
+        {% for employee in employees %}
+        <option value="{{employee.eid}}">{{employee.ename}}</option>
+        {% endfor %}
+      </select>
+      <label for="vname">Vehicle name</label>
+      <input name="vname" type="text" required value="" />
+      <label for="vname">Register NO</label>
+      <input name="vname" type="text" required value="" />
+      <label for="vname">Vehicle Model</label>
+      <input name="vname" type="text" required value="" />
+      <label for="vname">Vehicle Capacity</label>
+      <input name="vname" type="number" required value="" />
+      <label for="vname">Vehicle Cost</label>
+      <input name="vname" type="number" required value="" />
+      <label for="vname">Fuel Type</label>
+      <input name="vname" type="text" required value="" />
+      <input type="submit" value="Submit" />
+    </form>
+  </body>
+</html>
