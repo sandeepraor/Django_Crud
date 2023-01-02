@@ -11,6 +11,7 @@ def homepage(request):
 
 # Create your views here.  
 def emp(request):  
+    employee=Employee.objects.last()
     if request.method == "POST":  
         form = EmployeeForm(request.POST,request.FILES)  
         if form.is_valid():  
@@ -21,7 +22,7 @@ def emp(request):
                 pass
     else:  
         form = EmployeeForm()  
-    return render(request,'index.html',{'form':form})  
+    return render(request,'index.html',{'form':form , 'id':employee.eid+1})  
 def show(request):  
     employees = Employee.objects.all()  
     return render(request,"show.html",{'employees':employees})  
