@@ -41,9 +41,9 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'employee',
-    'vehicle'
+    'vehicle',
+    'user'
 ]
-LOGIN_REDIRECT_URL = 'home'
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -136,3 +136,5 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 # Add directory to store the images
 MEDIA_URL = "/media/"
 MEDIA_ROOT=os.path.join(BASE_DIR,"media/")
+
+LOGOUT_REDIRECT_URL = '/'

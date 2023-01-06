@@ -3,7 +3,8 @@ from django.shortcuts import render,redirect
 from django.contrib import messages
 from .forms import EmployeeForm 
 from .models import Employee
-
+from .decorators import *
+from django.contrib.auth.decorators import login_required
 #Load home page
 def homepage(request):
     return render(request,'home_page.html')
@@ -22,7 +23,10 @@ def emp(request):
                 pass
     else:  
         form = EmployeeForm()  
-    return render(request,'index.html',{'form':form , 'id':employee.eid+1})  
+    return render(request,'index.html',{'form':form , 'id':employee.eid+1}) 
+
+@login_required(login_url='/login')
+@allowed_users(['employee','admin'])
 def show(request):  
     employees = Employee.objects.all()  
     return render(request,"show.html",{'employees':employees})  
@@ -41,3 +45,9 @@ def destroy(request, eid):
     employee.delete()  
     return redirect("/show")
 
+def admindashboard(request):
+    return render(request,'admin_dashboard.html')
+
+
+def employeedashboard(request):
+    return render(request,'employee_dashboard.html')

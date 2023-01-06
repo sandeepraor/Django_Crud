@@ -3,6 +3,8 @@ from . import views
 urlpatterns = [
         
     path('',views.homepage),
+    path('admin-dashboard', views.admindashboard),
+    path('employee-dashboard',views.employeedashboard),
     path('emp', views.emp),  
     path('show',views.show),  
     path('edit/<int:eid>', views.edit),  
