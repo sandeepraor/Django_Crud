@@ -2,7 +2,11 @@ from django.shortcuts import render
 from .models import Vehicle
 from employee.models import Employee
 from .forms import VehicleForm
+from .decorators import allowed_users
+from django.contrib.auth.decorators import login_required
 
+@login_required(login_url='/login')
+@allowed_users(['admin'])
 def vehicle_add(request):
     emp = Employee.objects.all()
     if request.method=="POST":

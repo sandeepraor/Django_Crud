@@ -3,10 +3,8 @@
 <html lang="en" dir="ltr">
   <head>
     <meta charset="utf-8" />
-    <title>Login form</title>
-    {% load static %}
+    <title>Register Page</title>
   </head>
-
   <style>
     @import url('https://fonts.googleapis.com/css2?family=Noto+Sans:wght@700&family=Poppins:wght@400;500;600&display=swap');
     * {
@@ -18,19 +16,17 @@
     body {
       margin: 0;
       padding: 0;
-      background-image: url('../static/images/trainn.jpg');
-      background-size: cover;
-      overflow: hidden;
     }
     .center {
       position: absolute;
-      top: 50%;
+      top: 35%;
       left: 50%;
       transform: translate(-50%, -50%);
-      width: 400px;
+      width: 60vw;
       background: white;
       border-radius: 10px;
       box-shadow: 10px 10px 15px rgba(0, 0, 0, 0.05);
+      border: 2px solid black;
     }
     .center h1 {
       text-align: center;
@@ -101,8 +97,33 @@
       font-size: 18px;
       color: #e9f4fb;
       font-weight: 700;
+      margin-bottom: 2rem;
       cursor: pointer;
       outline: none;
+    }
+    select {
+      /* styling */
+      background-color: white;
+      border: thin solid blue;
+      border-radius: 4px;
+      display: inline-block;
+      font: inherit;
+      line-height: 1.5em;
+      padding: 0.5em 3.5em 0.5em 1em;
+
+      /* reset */
+
+      margin: 0;
+      -webkit-box-sizing: border-box;
+      -moz-box-sizing: border-box;
+      box-sizing: border-box;
+      -webkit-appearance: none;
+      -moz-appearance: none;
+    }
+    .txt_fieldd {
+      color: #2691d9;
+      display: flex;
+      flex-direction: column;
     }
     input[type='submit']:hover {
       border-color: #2691d9;
@@ -124,29 +145,44 @@
   </style>
   <body>
     <div class="center">
-      <h1>Login</h1>
-      <form method="post" action="/login/">
+      <h1>User Details</h1>
+      <form method="post" action="">
         {% csrf_token %}
+        <input
+          type="text"
+          value="{{user.id}}"
+          style="display: none"
+          name="email"
+        />
         <div class="txt_field">
-          <input type="text" name="username" required />
+          <input type="text" name="phone" required />
           <span></span>
-          <label>Username</label>
+          <label>Phone</label>
+        </div>
+        <div class="txt_fieldd">
+          <label for="">Gender</label>
+          <select name="gender">
+            <option value="M">Male</option>
+            <option value="F">Female</option>
+          </select>
         </div>
         <div class="txt_field">
-          <input type="password" name="password" required />
+          <input type="text" name="address" required />
           <span></span>
-          <label>Password</label>
+          <label>Address</label>
         </div>
+        <div class="txt_field">
+          <input type="text" name="addhar" required />
+          <span></span>
+          <label>Addhar Number</label>
+        </div>
+        <div>{{form.errors}}</div>
         <div class="messages">
           {% for message in messages %}
           <p>{{message}}</p>
           {% endfor %}
         </div>
-        <div class="pass">Forgot Password?</div>
-        <input type="submit" value="Login" />
-        <div class="signup_link">
-          Not a member? <a href="/register">Signup</a>
-        </div>
+        <input type="submit" value="Submit" />
       </form>
     </div>
   </body>

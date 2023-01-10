@@ -6,7 +6,7 @@ class Employee(models.Model):
     ename = models.CharField(max_length=100)  
     eemail = models.EmailField()  
     econtact = models.CharField(max_length=15)
-    eage = models.SmallIntegerField(default=18)
+    edob = models.DateField(default='2000-01-01')
     eaddhar = models.CharField(max_length=14 , default="Not Mentioned")
     isverified = models.BooleanField(default=False)
     # eimage = models.ImageField(upload_to='images/' , default="Not Provided")
