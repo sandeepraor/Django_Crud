@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <form action="/add_location" method="post">
+      {% csrf_token %}
+      <label for="place">Place</label>
+      <input type="text" name="pfrom" />
+      <input type="submit" value="Submit" />
+    </form>
+    <form action="/add_distance" method="post">
+      {% csrf_token %}
+      <select name="pfrom" id="">
+        {% for pl in places %}
+        <option value="{{pl.pfrom}}">{{pl.pfrom}}</option>
+        {% endfor %}
+      </select>
+      <select name="pto" id="">
+        {% for pl in places %}
+        <option value="{{pl.pfrom}}">{{pl.pfrom}}</option>
+        {% endfor %}
+      </select>
+      <label for="distance">Distance</label>
+      <input type="number" name="distance" />
+      <input type="submit" value="Submit" />
+    </form>
+    <div class="messages">
+      {% for message in messages %}
+      <p>{{message}}</p>
+      {% endfor %}
+    </div>
+    <div>{{place_form.errors}}</div>
+    <!-- <form action="/add_from_to">
+      <label for="place">Place</label>
+      <input type="text" name="pfrom" />
+      <input type="submit" value="Submit" />
+    </form> -->
+    <a href="/get_route">Show routes</a>
+  </body>
+</html>

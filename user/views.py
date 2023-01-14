@@ -11,6 +11,7 @@ from .decorators import *
 from django.contrib.auth.decorators import login_required
 from .decorators import *
 from .forms import *
+from django.contrib.auth.models import User
 from django.contrib.auth.models import Group
 
 # @unauthenticated_user
@@ -48,7 +49,6 @@ def register(request):
    print(form)
    if (request.method=="POST"):
          form=CreateUserForm(request.POST)
-         print(form)
          if form.is_valid():
             user=form.save()
             username =form.cleaned_data.get('username')
@@ -103,7 +103,7 @@ def edit_user_details(request):
    user_details = UserDetails.objects.get(email = request.user.id)
    print(user_details)
    return render(request,'edit_user.html',{'user_details':user_details})
-
+@login_required
 def update_user_details(request):
    user_details = UserDetails.objects.get(email = request.user.id)
    form = UserDetailsForm(request.POST,instance=user_details)

@@ -31,7 +31,7 @@ def emp(request):
     return render(request,'index.html',{'form':form , 'id':eid}) 
 
 @login_required(login_url='/login')
-@allowed_users(['employee','admin'])
+@allowed_users(['admin'])
 def show(request):  
     employees = Employee.objects.all()  
     return render(request,"show.html",{'employees':employees})
@@ -46,7 +46,8 @@ def edit(request, eid):
 @login_required(login_url='/login')
 @allowed_users(['employee','admin']) 
 def update(request, eid):  
-    employee = Employee.objects.get(eid=eid)  
+    employee = Employee.objects.get(eid=eid)
+    employee.isverified = False  
     form = EmployeeForm(request.POST, instance = employee)  
     if form.is_valid():  
         form.save()  
@@ -54,7 +55,7 @@ def update(request, eid):
     return render(request, 'edit.html', {'employee': employee})
 
 @login_required(login_url='/login')
-@allowed_users(['employee','admin'])
+@allowed_users(['admin'])
 def destroy(request, eid):  
     employee = Employee.objects.get(eid=eid)  
     employee.delete()  
@@ -64,6 +65,14 @@ def destroy(request, eid):
 @allowed_users(['admin'])
 def admindashboard(request):
     return render(request,'admin_dashboard.html')
+
+@login_required
+@allowed_users(['admin'])
+def verify_employee(request , id):
+    employee = Employee.objects.get(eid = id)
+    employee.isverified = True
+    employee.save()
+    return render(request,'message.html', {'error':False, 'message':'Verified ' + employee.ename+' Successfully' , 'links':[{'olink':'show' , 'text':"Click"}]})
 
 @login_required(login_url='/login')
 @allowed_users(['admin','employee'])

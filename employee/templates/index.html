@@ -42,7 +42,9 @@
         </div>
         <div class="form-group row">
           <label class="col-sm-2 col-form-label">Employee DOB:</label>
-          <div class="col-sm-4">{{ form.edob }}</div>
+          <div class="col-sm-4">
+            <input type="date" id="mydate" name="edob" />
+          </div>
         </div>
         <div class="form-group row">
           <label class="col-sm-2 col-form-label">Employee Addhar Number:</label>
@@ -61,5 +63,15 @@
         </div>
       </div>
     </form>
+    <script>
+      let date = new Date();
+      let day = date.getDate();
+      let month = date.getMonth() + 1;
+      let year = date.getFullYear();
+      const current = `${year}-${month % 10 == 0 ? '' : '0'}${month}-${day}`;
+      console.log(current);
+      my_date = document.getElementById('mydate');
+      my_date.max = current;
+    </script>
   </body>
 </html>

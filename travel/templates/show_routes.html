@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <table>
+      <tr>
+        <th>Places</th>
+      </tr>
+      {% for location in locations %}
+      <tr>
+        <td>{{location.pfrom}}</td>
+      </tr>
+      {% endfor %}
+    </table>
+    <br />
+    <br />
+    <br />
+    <table>
+      <tr>
+        <th>From</th>
+        <th>To</th>
+        <th>Distance</th>
+      </tr>
+      {% for route in routes %}
+      <tr>
+        <td>{{route.pfrom.pfrom}}</td>
+        <td>{{route.pto.pfrom}}</td>
+        <td>{{route.distance}}</td>
+      </tr>
+      {% endfor %}
+    </table>
+  </body>
+</html>

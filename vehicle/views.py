@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import render , redirect
 from .models import Vehicle
 from employee.models import Employee
 from .forms import VehicleForm
@@ -32,3 +32,16 @@ def vehicle_destroy(request,id):
 def vehicle_get(request):
     vehicle = Vehicle.objects.all()
     return render(request,'vehicle_display.html',{'vehicles':vehicle})
+
+def vehicle_edit(request,id):
+    vehicle_data = Vehicle.objects.get(vregister_no = id)
+    employees = Employee.objects.all()
+    return render(request,'vehicle_update.html',{'vehicle':vehicle_data,'employees':employees})
+def vehicle_update(request,id):
+    vehicle_data = Vehicle.objects.get(vregister_no = id)
+    employee = Employee.objects.all()
+    form = VehicleForm(request.POST,instance=vehicle_data)
+    if form.is_valid():
+        form.save()
+        return redirect('/vehicle_get')
+    return render(request,'vehicle_update.html',{'vehicle':vehicle_data,'employees':employee})

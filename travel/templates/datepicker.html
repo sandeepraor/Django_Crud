@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+      h1 {
+        color: red;
+      }
+    </style>
+  </head>
+  <body>
+    <input type="date" id="mydate" onchange="setMin()" />
+    <input type="date" id="mydate1" onchange="setMin()" />
+    <h1>Hello all this is a simple text</h1>
+    <h1 style="color: rebeccapurple">Hello all this is a simple text2</h1>
+    <button onclick="handleClick()">Print</button>
+    <script>
+      function handleClick() {
+        wn = window.print();
+      }
+      let date = new Date();
+      let day = date.getDate();
+      let month = date.getMonth() + 1;
+      let year = date.getFullYear();
+      const current = `${year}-${month % 10 == 0 ? '' : '0'}${month}-${day}`;
+      console.log(current);
+      my_date = document.getElementById('mydate');
+      my_date.min = current;
+      function setMin() {
+        document.getElementById('mydate1').min = my_date.value;
+      }
+    </script>
+  </body>
+</html>

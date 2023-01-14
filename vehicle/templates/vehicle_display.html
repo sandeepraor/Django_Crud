@@ -44,8 +44,11 @@
       <td>{{vehicle.capacity}}</td>
       <td>{{vehicle.cost}}</td>
       <td>{{vehicle.fuel}}</td>
-
+      <td>
+        <a href="/vehicle_edit/{{vehicle.vregister_no}}">Update Details</a>
+      </td>
       <td><a href="/vehicle_delete/{{vehicle.vregister_no}}">Delete</a></td>
+
       {% endfor %}
     </table>
     <a href="/vehicle_add/">Add Vehicle</a>
