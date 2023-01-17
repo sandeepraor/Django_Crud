@@ -1,5 +1,5 @@
 from django import forms
-from .models import Location,Distance
+from .models import Location,Distance,BookTrip
 
 class LocationForm(forms.ModelForm):
     class Meta:
@@ -9,3 +9,9 @@ class DistanceForm(forms.ModelForm):
     class Meta:
         model = Distance
         fields = "__all__"
+
+
+class TripForm(forms.ModelForm):
+    class Meta:
+        model = BookTrip
+        fields = '__all__'

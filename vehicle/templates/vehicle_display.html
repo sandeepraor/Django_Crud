@@ -35,21 +35,28 @@
         <thead>
           Fuel
         </thead>
+        <thead>
+          In Trip
+        </thead>
       </tr>
-      {% for vehicle in vehicles %}
-      <td>{{vehicle.employee_id}}</td>
-      <td>{{vehicle.vname}}</td>
-      <td>{{vehicle.vregister_no}}</td>
-      <td>{{vehicle.vmodel}}</td>
-      <td>{{vehicle.capacity}}</td>
-      <td>{{vehicle.cost}}</td>
-      <td>{{vehicle.fuel}}</td>
-      <td>
-        <a href="/vehicle_edit/{{vehicle.vregister_no}}">Update Details</a>
-      </td>
-      <td><a href="/vehicle_delete/{{vehicle.vregister_no}}">Delete</a></td>
-
-      {% endfor %}
+        {% for vehicle in vehicles %}
+        <tr>
+          <td>{{vehicle.employee_id}}</td>
+        <td>{{vehicle.vname}}</td>
+        <td>{{vehicle.vregister_no}}</td>
+        <td>{{vehicle.vmodel}}</td>
+        <td>{{vehicle.capacity}}</td>
+        <td>{{vehicle.cost}}</td>
+        <td>{{vehicle.fuel}}</td>
+        <td>{{vehicle.intrip}}</td>
+        <td>
+          <a href="/vehicle_edit/{{vehicle.vregister_no}}">Update Details</a>
+        </td>
+        <td><a href="/vehicle_delete/{{vehicle.vregister_no}}">Delete</a></td>
+        </tr>
+        
+        {% endfor %}
+      </div>
     </table>
     <a href="/vehicle_add/">Add Vehicle</a>
   </body>

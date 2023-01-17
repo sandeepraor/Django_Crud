@@ -14,7 +14,6 @@ def vehicle_add(request):
         print(form)
         if form.is_valid():
             try:
-                print(form)
                 form.save()
                 return render(request,'message.html', {'error':False, 'message':'Data added Successfully' , 'links':[{'olink':'vehicle_get/' , 'text':"Click"}]})
             except:

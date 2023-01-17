@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <form action="" method="post">
+      {% csrf_token %}
+      <input
+        type="text"
+        value="{{user.id}}"
+        style="display: none"
+        name="user"
+      />
+      <label for="from">From</label>
+      <select name="from_loc" id="from_place_select" onchange="handleplace()">
+        {% for place in places %}
+        <option value="{{place}}">{{place}}</option>
+        {% endfor %}
+      </select>
+      <label for="to">To</label>
+      <select name="to_loc" id="to_place_select" onchange="handleTo()"></select>
+      <input type="date" id="mydate" name="date" />
+      <select name="vehicle" id="vehicle_select" onchange="handleVehicle()">
+        {% for vehicle in vehicles %}
+        <option value="{{vehicle.vregister_no}}">{{vehicle.vname}}</option>
+        {% endfor %}
+      </select>
+      <input type="number" value="" id="cost_input" name="amount" />
+      <input type="submit" value="Submit" />
+    </form>
+    <script>
+      let date = new Date();
+      let day = date.getDate();
+      let month = date.getMonth() + 1;
+      let year = date.getFullYear();
+      let my_date = document.getElementById('mydate');
+      let my_date1 = document.getElementById('mydate1');
+      const current = `${year}-${month % 10 == 0 ? '' : '0'}${month}-${day}`;
+      console.log(current);
+      my_date.min = current;
+      function setMin() {
+        my_date1.min = my_date.value;
+      }
+      // let cost_input = document.getElementById('cost_input');
+      // let vehicle_select = document.getElementById('vehicle_select');
+      // function handleVehicle() {
+      //   console.log(vehicle_select.value);
+      // }
+      let amount = document.getElementById('cost_input');
+      let from_place_select =
+        document.getElementById('from_place_select').value;
+      let base_url = window.location.origin;
+
+      async function getapi(url) {
+        const response = await fetch(url);
+        var data = [];
+        data = await response.json();
+        return data.data;
+      }
+      async function getapi1(url) {
+        const response = await fetch(url);
+        var data = [];
+        data = await response.json();
+        return data;
+      }
+      let vehicle_price = 0;
+      let vehicle = document.getElementById('vehicle_select').value;
+      let vehicle_url = base_url + '/getvehicleprice/' + vehicle;
+      let vehicle_cost = getapi1(vehicle_url).then(result => {
+        vehicle_price = result.cost;
+        amount.value = vehicle_price;
+      });
+      console.log(vehicle_price);
+      function handleVehicle() {
+        vehicle = document.getElementById('vehicle_select').value;
+        vehicle_url = base_url + '/getvehicleprice/' + vehicle;
+        vehicle_cost = getapi1(vehicle_url).then(result => {
+          vehicle_price = result.cost;
+        });
+        amount.value = vehicle_price * distance_price;
+      }
+
+      let to_place_select = document.getElementById('to_place_select');
+      let place_url = base_url + '/getplace/' + from_place_select;
+      place_url = base_url + '/getplace/' + from_place_select;
+      places = getapi(place_url).then(result => {
+        prev = result;
+        for (let place in result) {
+          if (result[place].pk !== from_place_select) {
+            var option = document.createElement('option');
+            option.text = result[place].fields.pto;
+            option.value = place;
+            to_place_select.append(option);
+          }
+        }
+      });
+      let distance;
+      let distance_url =
+        base_url + '/getdistance/' + from_place_select + '/' + 'Chennai';
+
+      let distance_price = 0;
+      distance = getapi1(distance_url).then(result => {
+        distance_price = result.distance;
+        amount.value = amount.value * distance_price;
+      });
+      amount.value = distance_price;
+      let prev = [];
+      function handleplace() {
+        to_place_select = document.getElementById('to_place_select');
+        from_place_select = document.getElementById('from_place_select').value;
+        let places = [];
+        for (let i = 0; i < prev.length; i++) {
+          to_place_select.firstChild.remove();
+        }
+        place_url = base_url + '/getplace/' + from_place_select;
+        places = getapi(place_url).then(result => {
+          prev = result;
+          for (let place in result) {
+            if (result[place].pk !== from_place_select) {
+              var option = document.createElement('option');
+              option.text = result[place].fields.pto;
+              option.value = place;
+              to_place_select.append(option);
+            }
+          }
+        });
+      }
+      // Set the amount tab
+
+      function handleTo() {}
+    </script>
+  </body>
+</html>
