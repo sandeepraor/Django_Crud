@@ -50,11 +50,6 @@
       // function handleVehicle() {
       //   console.log(vehicle_select.value);
       // }
-      let amount = document.getElementById('cost_input');
-      let from_place_select =
-        document.getElementById('from_place_select').value;
-      let base_url = window.location.origin;
-
       async function getapi(url) {
         const response = await fetch(url);
         var data = [];
@@ -67,51 +62,81 @@
         data = await response.json();
         return data;
       }
-      let vehicle_price = 0;
-      let vehicle = document.getElementById('vehicle_select').value;
-      let vehicle_url = base_url + '/getvehicleprice/' + vehicle;
-      let vehicle_cost = getapi1(vehicle_url).then(result => {
-        vehicle_price = result.cost;
-        amount.value = vehicle_price;
-      });
-      console.log(vehicle_price);
-      function handleVehicle() {
-        vehicle = document.getElementById('vehicle_select').value;
-        vehicle_url = base_url + '/getvehicleprice/' + vehicle;
-        vehicle_cost = getapi1(vehicle_url).then(result => {
-          vehicle_price = result.cost;
-        });
-        amount.value = vehicle_price * distance_price;
+      function setvalue(val) {
+        to_place_select.value = val;
       }
-
+      let amount = document.getElementById('cost_input');
+      let from_place_select =
+        document.getElementById('from_place_select').value;
+      let base_url = window.location.origin;
       let to_place_select = document.getElementById('to_place_select');
       let place_url = base_url + '/getplace/' + from_place_select;
       place_url = base_url + '/getplace/' + from_place_select;
       places = getapi(place_url).then(result => {
         prev = result;
+        console.log('this is executed ');
         for (let place in result) {
           if (result[place].pk !== from_place_select) {
             var option = document.createElement('option');
             option.text = result[place].fields.pto;
-            option.value = place;
+            option.value = result[place].fields.pto;
             to_place_select.append(option);
           }
         }
-      });
-      let distance;
-      let distance_url =
-        base_url + '/getdistance/' + from_place_select + '/' + 'Chennai';
+        let toPlaceValue = document.getElementById('to_place_select').value;
+        let fromPlaceValue = document.getElementById('from_place_select').value;
+        let vehicle_price, distance;
+        let vehicle = document.getElementById('vehicle_select').value;
+        let vehicle_url = base_url + '/getvehicleprice/' + vehicle;
+        let distance_url =
+          base_url + '/getdistance/' + from_place_select + '/' + toPlaceValue;
 
-      let distance_price = 0;
-      distance = getapi1(distance_url).then(result => {
-        distance_price = result.distance;
-        amount.value = amount.value * distance_price;
+        let cost = getapi1(vehicle_url).then(result => {
+          vehicle_price = result.cost;
+          let dist_cost = getapi1(distance_url).then(newresult => {
+            distance = newresult.distance;
+            console.log(vehicle_price);
+            console.log(distance);
+            amount.value = distance * vehicle_price;
+          });
+        });
       });
-      amount.value = distance_price;
+
+      function handleVehicle() {
+        let toPlaceValue = document.getElementById('to_place_select').value;
+        let fromPlaceValue = document.getElementById('from_place_select').value;
+        let vehicle_price, distance;
+        let vehicle = document.getElementById('vehicle_select').value;
+        let vehicle_url = base_url + '/getvehicleprice/' + vehicle;
+        let distance_url =
+          base_url + '/getdistance/' + from_place_select + '/' + toPlaceValue;
+
+        let cost = getapi1(vehicle_url).then(result => {
+          vehicle_price = result.cost;
+          let dist_cost = getapi1(distance_url).then(newresult => {
+            distance = newresult.distance;
+            console.log(vehicle_price);
+            console.log(distance);
+            amount.value = distance * vehicle_price;
+          });
+        });
+      }
+
+      // let distance;
+      // let distance_url =
+      //   base_url + '/getdistance/' + from_place_select + '/' + 'Chennai';
+
+      // let distance_price = 0;
+      // distance = getapi1(distance_url).then(result => {
+      //   distance_price = result.distance;
+      //   amount.value = amount.value * distance_price;
+      // });
+      // amount.value = distance_price;
       let prev = [];
       function handleplace() {
         to_place_select = document.getElementById('to_place_select');
         from_place_select = document.getElementById('from_place_select').value;
+        console.log(from_place_select);
         let places = [];
         for (let i = 0; i < prev.length; i++) {
           to_place_select.firstChild.remove();
@@ -123,15 +148,51 @@
             if (result[place].pk !== from_place_select) {
               var option = document.createElement('option');
               option.text = result[place].fields.pto;
-              option.value = place;
+              option.value = result[place].fields.pto;
               to_place_select.append(option);
             }
+            // toPlaceValue = result[0].fields.pto;
           }
+          let toPlaceValue = document.getElementById('to_place_select').value;
+          let fromPlaceValue =
+            document.getElementById('from_place_select').value;
+          console.log(toPlaceValue);
+          let vehicle_price, distance;
+          let vehicle = document.getElementById('vehicle_select').value;
+          let vehicle_url = base_url + '/getvehicleprice/' + vehicle;
+          let distance_url =
+            base_url + '/getdistance/' + fromPlaceValue + '/' + toPlaceValue;
+
+          let cost = getapi1(vehicle_url).then(result => {
+            vehicle_price = result.cost;
+            let dist_cost = getapi1(distance_url).then(newresult => {
+              distance = newresult.distance;
+              amount.value = distance * vehicle_price;
+            });
+          });
         });
       }
       // Set the amount tab
 
-      function handleTo() {}
+      function handleTo() {
+        let toPlaceValue = document.getElementById('to_place_select').value;
+        let fromPlaceValue = document.getElementById('from_place_select').value;
+        let vehicle_price, distance;
+        let vehicle = document.getElementById('vehicle_select').value;
+        let vehicle_url = base_url + '/getvehicleprice/' + vehicle;
+        let distance_url =
+          base_url + '/getdistance/' + from_place_select + '/' + toPlaceValue;
+
+        let cost = getapi1(vehicle_url).then(result => {
+          vehicle_price = result.cost;
+          let dist_cost = getapi1(distance_url).then(newresult => {
+            distance = newresult.distance;
+            console.log(vehicle_price);
+            console.log(distance);
+            amount.value = distance * vehicle_price;
+          });
+        });
+      }
     </script>
   </body>
 </html>

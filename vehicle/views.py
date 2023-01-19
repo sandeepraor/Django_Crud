@@ -8,7 +8,7 @@ from django.contrib.auth.decorators import login_required
 @login_required(login_url='/login')
 @allowed_users(['admin'])
 def vehicle_add(request):
-    emp = Employee.objects.all()
+    emp = Employee.objects.filter(isverified = True)
     if request.method=="POST":
         form = VehicleForm(request.POST)
         print(form)
