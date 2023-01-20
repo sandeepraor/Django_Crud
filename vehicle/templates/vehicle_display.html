@@ -4,6 +4,12 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      rel="stylesheet"
+      href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
+      integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u"
+      crossorigin="anonymous"
+    />
     <title>Document</title>
     <style>
       * {
@@ -12,52 +18,55 @@
     </style>
   </head>
   <body>
-    <table>
-      <tr>
-        <thead>
-          Employee Id
-        </thead>
-        <thead>
-          Vehicle Name
-        </thead>
-        <thead>
-          Vehicle Registeration No
-        </thead>
-        <thead>
-          Employee Model
-        </thead>
-        <thead>
-          Capacity
-        </thead>
-        <thead>
-          Cost
-        </thead>
-        <thead>
-          Fuel
-        </thead>
-        <thead>
-          In Trip
-        </thead>
-      </tr>
-        {% for vehicle in vehicles %}
-        <tr>
-          <td>{{vehicle.employee_id}}</td>
-        <td>{{vehicle.vname}}</td>
-        <td>{{vehicle.vregister_no}}</td>
-        <td>{{vehicle.vmodel}}</td>
-        <td>{{vehicle.capacity}}</td>
-        <td>{{vehicle.cost}}</td>
-        <td>{{vehicle.fuel}}</td>
-        <td>{{vehicle.intrip}}</td>
-        <td>
-          <a href="/vehicle_edit/{{vehicle.vregister_no}}">Update Details</a>
-        </td>
-        <td><a href="/vehicle_delete/{{vehicle.vregister_no}}">Delete</a></td>
-        </tr>
-        
-        {% endfor %}
+    <div class="container">
+      <div style="overflow-x: scroll" class="row">
+        <table class="table table-striped">
+          <thead>
+            <tr>
+              <th>Employee Id</th>
+              <th>Vehicle Name</th>
+              <th>Register No</th>
+              <th>Model</th>
+              <th>Capacity</th>
+              <th>Cost(per KM)</th>
+              <th>Fuel Type</th>
+              <!-- <th>Edit</th> -->
+            </tr>
+          </thead>
+          <tbody>
+            {% for vehicle in vehicles %}
+            <tr>
+              <td>{{vehicle.employee_id}}</td>
+              <td>{{vehicle.vname}}</td>
+              <td>{{vehicle.vregister_no}}</td>
+              <td>{{vehicle.vmodel}}</td>
+              <td>{{vehicle.capacity}}</td>
+              <td>{{vehicle.cost}}</td>
+              <td>{{vehicle.fuel}}</td>
+              <td>
+                <button class="btn btn-primary">
+                  <a
+                    style="color: white; text-decoration: none"
+                    href="/vehicle_edit/{{vehicle.vregister_no}}"
+                    >Update Details</a
+                  >
+                </button>
+              </td>
+              <td>
+                <button class="btn btn-danger">
+                  <a
+                    style="color: white; text-decoration: none"
+                    href="/vehicle_delete/{{vehicle.vregister_no}}"
+                    >Delete</a
+                  >
+                </button>
+              </td>
+            </tr>
+
+            {% endfor %}
+          </tbody>
+        </table>
       </div>
-    </table>
-    <a href="/vehicle_add/">Add Vehicle</a>
+    </div>
   </body>
 </html>

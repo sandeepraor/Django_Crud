@@ -4,10 +4,49 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      rel="stylesheet"
+      href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
+      integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u"
+      crossorigin="anonymous"
+    />
     <title>Document</title>
+    {% load static %}
   </head>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Noto+Sans:wght@700&family=Poppins:wght@400;500;600&display=swap');
+    body {
+      background: url('../static/images/car1.jpeg') no-repeat;
+      background-size: cover;
+    }
+    .box {
+      color: white;
+      font-family: 'Poppins', sans-serif;
+    }
+    a {
+      color: white;
+      text-decoration: none;
+    }
+    a:hover {
+      color: white;
+      text-decoration: none;
+    }
+    .btns {
+      display: flex;
+      width: 40vw;
+      justify-content: space-between;
+      margin: 200px;
+    }
+  </style>
   <body>
-    <h1>Hello all</h1>
-    <a href="/travel">Book a trip</a>
+    <div class="box">
+      <center><h1 style="margin: 10vh">Welcome {{request.user}}!</h1></center>
+      <center>
+        <div class="btns">
+          <a class="btn btn-primary btn-lg" href="/travel_book">Book a trip</a>
+          <a class="btn btn-success btn-lg" href="/profile">Profile</a>
+        </div>
+      </center>
+    </div>
   </body>
 </html>

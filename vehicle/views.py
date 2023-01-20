@@ -29,7 +29,7 @@ def vehicle_destroy(request,id):
     return render(request,'message.html', {'error':False, 'message':'Data Deleted Successfully' , 'links':[{'olink':'vehicle_get/' , 'text':"Click"}]})
 
 def vehicle_get(request):
-    vehicle = Vehicle.objects.all()
+    vehicle = Vehicle.objects.all().order_by('employee').values()
     return render(request,'vehicle_display.html',{'vehicles':vehicle})
 
 def vehicle_edit(request,id):
