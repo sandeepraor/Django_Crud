@@ -77,6 +77,44 @@
     <a class="btn btn-primary" href="/">back</a>
   </div>
  </center>
-    
+ {% if trip %}
+ <center><h1 style="margin-top: 5rem;">Trip Details</h1></center>
+
+ <div>
+   <div class="container" style="margin-top: 10vh;">
+     <div class="row">
+       <table class="table table-striped">
+         <thead>
+           <tr>
+             <th>Trip ID</th>
+             <th>From</th>
+             <th>To</th>
+             <th>Date</th>
+             <th>Vehicle</th>
+             <th>Amount</th>
+             <th>Driver</th>
+             <th>Contact No.</th>
+           </tr>
+         </thead>
+         <tbody>
+           {% for tri,phone in data %}
+           <tr>
+             <td>{{tri.trip_id}}</td>
+             <td>{{tri.from_loc}}</td>
+             <td>{{tri.to_loc}}</td>
+             <td>{{tri.date}}</td>
+             <td>{{tri.vehicle}}</td>
+             <td>{{tri.amount}}</td>
+             <td>{{phone.name}}</td>
+             <td><a href="tel:{{phone}}" alt="{{phone}}">{{phone.contact}}</a></td>
+           </tr>
+           {% endfor %}
+         </tbody>
+       </table>
+     </div>
+   </div>
+ </div>
+ {% endif %}
+
   </body>
 </html>

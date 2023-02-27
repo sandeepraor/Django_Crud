@@ -13,7 +13,9 @@ from .decorators import *
 from .forms import *
 from django.contrib.auth.models import User
 from django.contrib.auth.models import Group
-
+import travel.models as mod
+import employee.models as emp
+import vehicle.models as veh
 # @unauthenticated_user
 def loginUser(request):
 
@@ -71,13 +73,21 @@ def profile(request):
    if request.user.groups.all()[0].name == 'employee':
       return redirect('/employee-dashboard')
    user_detail = UserDetails.objects.filter(email_id = request.user.id)
-   print(request.user.groups.all()[0].name)
+   trip_detail = mod.BookTrip.objects.filter(user = request.user)
+   emp_detail = []
+   for trip in trip_detail:
+      vehicle = veh.Vehicle.objects.filter(vregister_no=trip.vehicle.vregister_no)
+      stri = str(vehicle.get().employee)
+      employees = emp.Employee.objects.filter(eid = int(stri[len(stri)-2]))
+      emp_detail.append({'contact': employees.get().econtact,'name': employees.get().ename})
+   print(emp_detail)
    if not user_detail:
       profile_bool = False
       print(profile_bool)
       return render(request,'profile.html',{'profile_bool':not profile_bool})
    else : 
-      return render(request,'profile.html',{'details' : user_detail.get()})
+      zipped = zip(trip_detail,emp_detail)
+      return render(request,'profile.html',{'details' : user_detail.get() , 'trip' : trip_detail,'phones' : emp_detail,'data':zipped})
 
 @login_required
 @allowed_users(['enduser','admin'])
