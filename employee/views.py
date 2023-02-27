@@ -4,7 +4,7 @@ from django.contrib import messages
 from .forms import EmployeeForm 
 from .models import Employee
 from .decorators import *
-import datetime
+from datetime import date
 from django.contrib.auth.decorators import login_required
 #Load home page
 def homepage(request):
@@ -41,7 +41,8 @@ def show(request):
 @allowed_users(['employee','admin'])  
 def edit(request, eid):
     employee = Employee.objects.get(eid=eid)  
-    return render(request,'edit.html', {'employee':employee}) 
+    fdob = str(employee.edob)
+    return render(request,'edit.html', {'employee':employee , 'fdob':fdob}) 
 
 @login_required(login_url='/login')
 @allowed_users(['employee','admin']) 
@@ -49,10 +50,12 @@ def update(request, eid):
     employee = Employee.objects.get(eid=eid)
     employee.isverified = False  
     form = EmployeeForm(request.POST, instance = employee)  
+    print(form.errors)
     if form.is_valid():  
         form.save()  
-        return redirect("/show")  
-    return render(request, 'edit.html', {'employee': employee})
+        return redirect("/show") 
+    fdob = str(employee.edob)
+    return render(request, 'edit.html', {'employee': employee , 'fdob' : fdob})
 
 @login_required(login_url='/login')
 @allowed_users(['admin'])

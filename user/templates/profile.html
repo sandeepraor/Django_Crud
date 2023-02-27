@@ -5,27 +5,78 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Document</title>
+    <link
+      rel="stylesheet"
+      href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
+      integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u"
+      crossorigin="anonymous"
+    />
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Noto+Sans:wght@700&family=Poppins:wght@400;500;600&display=swap');
+        *{
+          font-family: 'Poppins',sans-serif;
+          margin: 0;
+          padding: 0;
+        }
+      .hori{
+        margin: 1.5rem;
+        width: 60vw;
+        margin-left: 20rem;
+        display: flex;
+        align-items: center;
+      }
+      .hori h3{
+        font-size: 18px;
+        margin-top: -0.4rem;
+        padding: 1rem;
+        color: rgb(37, 142, 247);
+      }
+      .hori p{
+        font-size: 17px;
+      }
+    </style>
   </head>
   <body>
-    {% for message in messages %}
-    <p>{{message}}</p>
-    {% endfor %}
-    <p>Profile for {{user}}</p>
-    <p>{{user.email}}</p>
-    <p>{{user.id}}</p>
-    <h1>{{profile_bool}}</h1>
+    <center> <h1 style="color:rgb(15, 27, 40); text-decoration: underline;">Profile for {{user}}</h1></center>
+    <center>
     <div>
-      <p>{{details.phone}}</p>
-      <p>{{details.addhar}}</p>
-      <p>{{details.gender}}</p>
-      <p>{{details.address}}</p>
-    </div>
-
+      <div class="hori">
+        <h3>Email Address : </h3>
+        <p>{{user.email}}</p>
+      </div>
+    
+   <div class="hori">
+    <h3>User ID : </h3>
+    <p>{{user.id}}</p>
+   </div>
+   <div class="hori">
+    <h3>Phone Number : </h3>
+    <p>{{details.phone}}</p>
+   </div>
+   <div class="hori">
+    <h3>Addhar Number : </h3>
+    <p>{{details.addhar}}</p>
+   </div>
+   <div class="hori">
+    <h3>Gender Number : </h3>
+    <p>{{details.gender}}</p>
+   </div>
+   <div class="hori">
+    <h3>Address : </h3>
+    <p>{{details.address}}</p>
+   </div>
+   </div>
+  </center>
+ <center>
+  <div style="display: flex; justify-content: space-evenly;">
     {% if profile_bool %}
-    <h1>User Details not present</h1>
-    <a href="/add_user_details">Add User Details</a>
+    <a class="btn btn-warning" href="/add_user_details">Add User Details</a>
     {% endif %}
-    <a href="/edit_user_details">Update details</a>
-    <a href="/logout">Logout</a>
+    <a class="btn btn-warning" href="/edit_user_details">Update details</a>
+    <a class="btn btn-danger" href="/logout">Logout</a>
+    <a class="btn btn-primary" href="/">back</a>
+  </div>
+ </center>
+    
   </body>
 </html>

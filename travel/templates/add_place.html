@@ -5,41 +5,82 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Document</title>
+    <link
+      rel="stylesheet"
+      href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
+      integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u"
+      crossorigin="anonymous"
+    />
+    <style>
+      @import url('https://fonts.googleapis.com/css2?family=Noto+Sans:wght@700&family=Poppins:wght@400;500;600&display=swap');
+      *{
+        font-family:  'Poppins', sans-serif;
+      }
+      .lable-place{
+        color: rgb(8, 140, 211);
+        font-size: 18px;
+        margin: 5px;
+      }
+      .lable-input{
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+      }
+      .center{
+        display: flex;
+        justify-content: center;
+      }
+    </style>
+
   </head>
   <body>
-    <form action="/add_location" method="post">
-      {% csrf_token %}
-      <label for="place">Place</label>
-      <input type="text" name="pfrom" />
-      <input type="submit" value="Submit" />
-    </form>
-    <form action="/add_distance" method="post">
-      {% csrf_token %}
-      <select name="pfrom" id="">
-        {% for pl in places %}
-        <option value="{{pl.pfrom}}">{{pl.pfrom}}</option>
-        {% endfor %}
-      </select>
-      <select name="pto" id="">
-        {% for pl in places %}
-        <option value="{{pl.pfrom}}">{{pl.pfrom}}</option>
-        {% endfor %}
-      </select>
-      <label for="distance">Distance</label>
-      <input type="number" name="distance" />
-      <input type="submit" value="Submit" />
-    </form>
-    <div class="messages">
-      {% for message in messages %}
-      <p>{{message}}</p>
-      {% endfor %}
-    </div>
-    <div>{{place_form.errors}}</div>
-    <!-- <form action="/add_from_to">
-      <label for="place">Place</label>
-      <input type="text" name="pfrom" />
-      <input type="submit" value="Submit" />
-    </form> -->
-    <a href="/get_route">Show routes</a>
+    <div style="display: flex; flex-direction: row; justify-content: space-evenly;">
+      <div class="center">
+        <div style="width: 40vw; border: 1px solid black; padding: 5rem; border-radius: 2rem ; margin-top: 5rem;">
+          <center><h2>Add New Place</h2></center>
+          <form action="/add_location" method="post">
+            {% csrf_token %}
+            <div class="label-input">
+              <label class="lable-place"  for="place">Place</label>
+              <input class="form-control" type="text" name="pfrom" />
+            </div>
+            <center>
+              <input style="margin: 10px;" class="btn btn-primary" type="submit" value="Submit" />
+            </center>
+          </form>
+        </div>
+      </div>
+      <div class="center">
+        <div style="width: 40vw; border: 1px solid black; padding: 5rem; border-radius: 2rem ; margin-top: 5rem;">
+          <center><h2>Add New Distance</h2></center>
+          <form action="/add_distance" method="post">
+            {% csrf_token %}
+        <div class="lable-input"> 
+          <label class="lable-place" for="">From</label>
+          <select  class="form-control" name="pfrom" id="">
+    {% for pl in places %}
+    <option value="{{pl.pfrom}}">{{pl.pfrom}}</option>
+    {% endfor %}
+  </select></div>
+           <div class="label-input">
+            <label class="lable-place" for="">To</label>
+            <select class="form-control" name="pto" id="">
+              {% for pl in places %}
+              <option value="{{pl.pfrom}}">{{pl.pfrom}}</option>
+              {% endfor %}
+            </select>
+           </div>
+            
+            <div class="label-input">
+              <label class="lable-place" for="distance">Distance</label>
+            <input class="form-control" type="number" name="distance" />
+            </div>
+            <center><input class="btn btn-primary" style="margin: 10px;"  type="submit" value="Submit" /></center>
+            
+          </form>
+        </div>
+      </div></div>
+    <center><a style="margin-top: 5rem;" class="btn btn-success" href="/get_route">Show routes</a></center>
+    
   </body>
 </html>

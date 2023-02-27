@@ -105,9 +105,10 @@ def edit_user_details(request):
    return render(request,'edit_user.html',{'user_details':user_details})
 @login_required
 def update_user_details(request):
-   user_details = UserDetails.objects.get(email = request.user.id)
-   form = UserDetailsForm(request.POST,instance=user_details)
-   if form.is_valid():
-      form.save()
+   if UserDetails.objects.filter(email = request.user.id).exists():
+      user_details = UserDetails.objects.get(email = request.user.id)
+      form = UserDetailsForm(request.POST,instance=user_details)
+      if form.is_valid():
+         form.save()
       return redirect('/profile')
    return render(request,'edit_user.html',{'user_details':user_details})  

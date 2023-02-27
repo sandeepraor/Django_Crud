@@ -5,34 +5,61 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Document</title>
+    <link
+      rel="stylesheet"
+      href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
+      integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u"
+      crossorigin="anonymous"
+    />
+    <style>
+      *{
+        font-family: 'Poppins',sans-serif;
+      }
+       @import url('https://fonts.googleapis.com/css2?family=Noto+Sans:wght@700&family=Poppins:wght@400;500;600&display=swap');
+    </style>
   </head>
   <body>
-    <table>
-      <tr>
-        <th>Places</th>
-      </tr>
-      {% for location in locations %}
-      <tr>
-        <td>{{location.pfrom}}</td>
-      </tr>
-      {% endfor %}
-    </table>
-    <br />
-    <br />
-    <br />
-    <table>
-      <tr>
-        <th>From</th>
-        <th>To</th>
-        <th>Distance</th>
-      </tr>
-      {% for route in routes %}
-      <tr>
-        <td>{{route.pfrom.pfrom}}</td>
-        <td>{{route.pto.pfrom}}</td>
-        <td>{{route.distance}}</td>
-      </tr>
-      {% endfor %}
-    </table>
+    <div style="display: flex; justify-content: space-evenly; flex-direction: row;">
+      <div class="container" style="margin-top: 10vh;width: 30vw; padding: 5rem; border-radius: 4rem; border: 1px solid black;">
+        <div class="row">
+          <table class="table table-striped">
+            <thead>
+              <tr>
+                <th>Places</th>
+              </tr>
+            </thead>
+            <tbody>
+              {% for location in locations %}
+              <tr>
+                <td>{{location.pfrom}}</td>
+              </tr>
+              {% endfor %}
+            </tbody>
+          </table>
+        </div>
+      </div>
+      <div class="container" style="margin-top: 10vh; width: 60vw; padding: 5rem; border-radius: 4rem; border: 1px solid black;">
+        <div class="row">
+          <table class="table table-striped">
+            <thead>
+              <tr>
+                <th>From</th>
+                <th>To</th>
+                <th>Distance</th>
+              </tr>
+            </thead>
+            <tbody>
+              {% for route in routes %}
+        <tr>
+          <td>{{route.pfrom.pfrom}}</td>
+          <td>{{route.pto.pfrom}}</td>
+          <td>{{route.distance}}</td>
+        </tr>
+        {% endfor %}
+            </tbody>
+          </table>
+        </div>
+      </div></div>
+    
   </body>
 </html>

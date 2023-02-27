@@ -5,20 +5,36 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Document</title>
+    <link
+      rel="stylesheet"
+      href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
+      integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u"
+      crossorigin="anonymous"
+    />
+    <style>
+         @import url('https://fonts.googleapis.com/css2?family=Noto+Sans:wght@700&family=Poppins:wght@400;500;600&display=swap');
+      body{
+        background-image: url('../static/images/beach.jpg');
+        background-repeat: no-repeat;
+        background-size:cover ;
+        font-family:  'Poppins', sans-serif;
+      }
+    </style>
   </head>
   <body>
-    <h1>This is Admin Dash Board</h1>
-    <br />
+      <h1 style="color: aliceblue; display: flex; justify-content: center; text-decoration: underline;">Admin Dash Board</h1>
+      <center>
+        <div style="display: flex; color: black; justify-content: space-evenly; flex-direction: row; align-items: center; height: 40vh; width: 60vw; flex-wrap: wrap;">
+          <a class="m-10 btn btn-success btn-lg" href="/emp">Add Employee</a>
+          <a class="m-10 btn btn-success btn-lg" href="/vehicle_add">Add Vehicle</a>
+          <a class="m-10 btn btn-success btn-lg" href="/vehicle_get">Show Vehicles</a>
+          <a class="m-10 btn btn-success btn-lg" href="/add_location">Add new add_location</a>
+          <a class="m-10 btn btn-success btn-lg" href="/show">Show employee Details</a>
+          <a class="m-10 btn btn-success btn-lg" href="/admin/travel/booktrip/">Show Trip Details</a>
+          <a type="button" class="m-10 btn btn-danger" href="/logout">Logout</a>
+        </div>
+      </center>
+      
 
-    <a href="/emp">Add Employee</a>
-    <br />
-    <a href="/vehicle_add">Add Vehicle</a>
-    <a href="/vehicle_get">Show Vehicles</a>
-    <br />
-    <a href="/logout">Logout</a>
-    <br />
-    <a href="/add_location">Add new add_location</a>
-    <br />
-    <a href="/show">Show employee Details</a>
   </body>
 </html>
